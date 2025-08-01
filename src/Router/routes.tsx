@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { AuthScreen } from "../pages/auth/auth";
 import { DashboardUser } from "../pages/dashboard/user";
 import DashboardScreen from "../pages/dashboard/dashboard";
+import { Preloader } from "../components/UI/Preloader";
 
 
 type RouteType = {
@@ -39,6 +40,7 @@ const AppRouter =()=> {
   ]
   return(
     <BrowserRouter>
+      <Preloader/>
       <Routes>
         {publicRoutes.map((route) => (
           <Route

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Icon } from "../UI/Icon";
-import type { MenuProps } from "../../../../lendsqr-assessmentt/src/utils/customerMenu";
+import type { MenuProps } from "../../utils/customerMenu";
 
 interface MenuLayoutProps {
   menuItems: MenuProps[];
