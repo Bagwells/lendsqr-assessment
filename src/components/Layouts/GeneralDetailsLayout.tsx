@@ -41,6 +41,12 @@ export const GeneralDetailsLayout =()=> {
         <DetailsTexts title="email address" value={'debby@gmail.com'}/>
         <DetailsTexts title="Relationship" value="Sister"/>
       </DetailsTiles>
+      <DetailsTiles title="" className="">
+        <DetailsTexts title="Full Name" value={'Debby Ogana'}/>
+        <DetailsTexts title="Phone Number" value={'07060780922'}/>
+        <DetailsTexts title="email address" value={'debby@gmail.com'}/>
+        <DetailsTexts title="Relationship" value="Sister"/>
+      </DetailsTiles>
     </div>
   )
 }

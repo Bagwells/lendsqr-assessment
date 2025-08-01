@@ -6,7 +6,6 @@ import { AppContext } from "../../contexts/APPContext"
 
 export const DashboardUser =()=> {
   const {selectedUser, isUserDetails, setUserDetails} = useContext(AppContext);
-
   return(
     <>
       {isUserDetails && 

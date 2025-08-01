@@ -1,8 +1,9 @@
-import { lazy, Suspense, type JSX } from "react";
+import { lazy, Suspense, useRef, type JSX } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { Preloader } from "../components/UI/Preloader";
 import LoadingScreen from "../components/utilities/LoadingScreen";
 import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const AuthScreen = lazy(() => import("../pages/auth/auth"));
 const DashboardUser = lazy(() => import("../pages/dashboard/user"));
@@ -42,8 +43,15 @@ const AppRouter =()=> {
       ]
     }
   ]
+  const hasShownToast = useRef(false);
 
-  if(isAuth) {<Navigate to={'/dashboard'}/>}
+  if(isAuth) {
+    <Navigate to={'/dashboard'}/> 
+    if (!hasShownToast.current) {
+      toast.info('User Authenticated')
+      hasShownToast.current = true;
+    }
+  }
   
   return(
     <BrowserRouter>

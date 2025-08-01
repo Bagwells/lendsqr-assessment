@@ -39,7 +39,7 @@ export const NavBar =({trigger, action}:{trigger:()=>void, action:boolean})=> {
             </picture>
           </div>
           <div className="flex items-center gap-1 title-color cursor-pointer">
-            <p className="work-sans text-4 text-medium hidden lg:inline">Adedeji</p>
+            <p className="work-sans text-4 text-medium hidden lg:inline">Bagwells</p>
             <IoMdArrowDropdown size={20}/>
           </div>
         </div>
