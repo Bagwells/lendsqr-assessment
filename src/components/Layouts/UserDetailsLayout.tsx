@@ -38,10 +38,10 @@ export const UserDetailsLayout =({ onClose}:UserDetailsProps)=> {
   return(
     <div className="w-full h-full p-6 md:!p-[48px] xl:!p-[60px] space-y-10 work-sans">
       <div onClick={onClose} 
-        className="flex items-center text-color text-4 gap-3 ">
+        className="flex items-center text-color text-4 gap-3 cursor-pointer">
         <FaArrowLeftLong /> <span>Back to Users</span>
       </div>
-      <div className="flex flex-col lg:flex-row w-full justify-between gap-4">
+      <div className="flex flex-col lg:flex-row w-full justify-between gap-4 ">
         <h4 className="title-color text-medium text-6 work-sans">
           Users Details
         </h4>

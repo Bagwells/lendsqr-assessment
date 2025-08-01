@@ -11,22 +11,22 @@
 
 @font-face {
   font-family: "Avenir";
-  src: url('/fonts/Avenir\ Next\ LT\ Pro\ Bold.otf') format('opentype'),
-       url('/fonts/karu-bold.ttf') format('truetype');
+  src: url('./fonts/Avenir\ Next\ LT\ Pro\ Bold.otf') format('opentype'),
+       url('./fonts/karu-bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Avenir";
-  src: url('/fonts/karu-medium.ttf') format('truetype');
+  src: url('./fonts/karu-medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Avenir";
-  src: url('/fonts/Metropolis-SemiBold.otf') format('opentype');
+  src: url('./fonts/Metropolis-SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
 }

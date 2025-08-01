@@ -54,7 +54,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-md">
+    <div className="flex flex-col w-full max-w-lg">
       <div className="space-y-1.5 lg:space-y-2.5 mb-[60px] text-center">
         <h1 className="text-bold text-10 title-color">Welcome!</h1>
         <p className="text-5 text-regular text-color">Enter details to login.</p>
@@ -87,7 +87,7 @@ export const LoginForm = () => {
           />
           <div
             onClick={() => setShowPassword(!showPassword)}
-            className="pos-absolute cursor-pointer text uppercase primary text-3 top-4 right-4 text-semibold"
+            className="pos-absolute cursor-pointer text uppercase primary text-3 top-5 right-4 text-semibold"
           >
             {showPassword ? 'Hide' : 'Show'}
           </div>
