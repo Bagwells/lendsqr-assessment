@@ -1,0 +1,19 @@
+$spacing: (0: 0, 1: 4px, 2: 8px, 3: 12px, 4: 16px, 5: 20px, 6: 24px, 7: 28px, 8: 32px, 9: 36px, 10: 40px, 12: 48px );
+
+@each $key, $value in $spacing {
+  .p-#{$key}    { padding: $value; }
+  .pt-#{$key}   { padding-top: $value; }
+  .pr-#{$key}   { padding-right: $value; }
+  .pb-#{$key}   { padding-bottom: $value; }
+  .pl-#{$key}   { padding-left: $value; }
+
+  .m-#{$key}    { margin: $value; }
+  .mt-#{$key}   { margin-top: $value; }
+  .mr-#{$key}   { margin-right: $value; }
+  .mb-#{$key}   { margin-bottom: $value; }
+  .ml-#{$key}   { margin-left: $value; }
+}
+
+
+
+

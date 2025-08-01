@@ -1,0 +1,26 @@
+@use './layout';
+
+$breakpoints: (xs:420px, sm: 640px, md: 768px, lg: 1024px, xl: 1280px);
+
+@each $bp, $val in $breakpoints {
+  @media (min-width: #{$val}) {
+    .#{$bp}\:flex              { display: flex; }
+    .#{$bp}\:inline            { display: inline; }
+    .#{$bp}\:block             { display: block; }
+    .#{$bp}\:hidden            { display: none; }
+    .#{$bp}\:grid              { display: grid; }
+    .#{$bp}\:inline-flex       { display: inline-flex; }
+    .#{$bp}\:inline-block      { display: inline-block; }
+    .#{$bp}\:visible           { visibility: visible; }
+    .#{$bp}\:invisible         { visibility: hidden; }
+
+    .#{$bp}\:justify-center    { justify-content: center; }
+    .#{$bp}\:items-center      { align-items: center; }
+    .#{$bp}\:flex-col          { flex-direction: column; }
+    .#{$bp}\:flex-row          { flex-direction: row; }
+    .#{$bp}\:flex-row-reverse  { flex-direction: row-reverse; }
+    .#{$bp}\:flex-col-reverse  { flex-direction: column-reverse; }
+
+  }
+}
+

@@ -1,0 +1,19 @@
+
+$positions: (static, relative, absolute, fixed, sticky);
+$spacing: (0: 0, 1: 4px, 2: 8px, 3: 12px, 4: 16px, 5: 20px, 6: 24px, 7: 28px, 8: 32px, 9: 36px, 10: 40px, 12: 48px );
+
+@each $pos in $positions {
+  .pos-#{$pos} { position: $pos; }
+}
+
+@each $key, $val in $positions {
+  .top-#{$key} { top: $val; }
+  .bottom-#{$key} {bottom: $val; }
+  .right-#{key} {right: $val; }
+  .left-#{key} {left: $val; }
+}
+
+.top-0    { top: 0; }
+.right-0  { right: 0; }
+.bottom-0 { bottom: 0; }
+.left-0   { left: 0; }

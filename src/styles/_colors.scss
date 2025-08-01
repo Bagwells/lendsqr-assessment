@@ -1,0 +1,29 @@
+@use './color' as *;
+
+
+$colors: (
+  primary: $primary-color,
+  success: $success,
+  success-lite: $success-lite,
+  danger: $danger,
+  danger-lite: $danger-lite,
+  warning: $warning,
+  warning-lite: $warning-lite,
+  text-color: $text-color,
+  title-color: $title-color,
+  background: $background-color
+);
+
+@each $name, $hex in $colors {
+  .#{$name} {
+    color: $hex;
+  }
+  .bg-#{$name} {
+    background-color: $hex;
+  }
+  .border-#{$name} {
+    border-color: $hex;
+  }
+}
+
+
