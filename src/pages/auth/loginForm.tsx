@@ -13,7 +13,7 @@ type loginProp = {
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const {setIsAuth} = useAuth();
+  const {isAuth, setIsAuth} = useAuth();
   const [login, setLogin] = useState<loginProp>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<loginProp>({ email: '', password: '' });
@@ -38,6 +38,7 @@ export const LoginForm = () => {
     try {
         if (validate()) {
         setIsAuth(true);
+        sessionStorage.setItem("authToken", JSON.stringify(isAuth))
         toast.success('Sign-In successful')
         navigate("/dashboard")
       } else {

@@ -19,9 +19,10 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   });
 
   const [isUserDetails, setUserDetails] = useState<boolean>(false);
+  const [isAuth, setIsAuth] = useState<boolean>(false);
 
   return (
-    <AppContext.Provider value={{ selectedUser, setSelectedUser, isUserDetails, setUserDetails }}>
+    <AppContext.Provider value={{ selectedUser, setSelectedUser, isUserDetails, setUserDetails, isAuth, setIsAuth }}>
       {children}
     </AppContext.Provider>
   );

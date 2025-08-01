@@ -8,6 +8,8 @@ export interface AppContextType {
   setSelectedUser: (value:User)=>void;
   isUserDetails: boolean;
   setUserDetails: (value: boolean)=> void;
+  isAuth: boolean;
+  setIsAuth: (value:boolean) => void;
 }
 
 export const AppContext = createContext<AppContextType>({
@@ -23,4 +25,6 @@ export const AppContext = createContext<AppContextType>({
   setSelectedUser:()=> {},
   isUserDetails: false,
   setUserDetails: ()=> {},
+  isAuth:false,
+  setIsAuth:()=> {}
 })
