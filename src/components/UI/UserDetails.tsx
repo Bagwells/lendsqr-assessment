@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 interface Props {
   title: string;
-  value: string;
+  value: string | number ;
 }
 
 interface TileProps {

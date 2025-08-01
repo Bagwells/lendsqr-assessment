@@ -90,6 +90,9 @@ src/
   - Notifications handled via `react-toastify`.
   - `LoadingScreen` & `Preloader` improve user experience.
 
+  **Solid error checks**: 
+  - Error check and catch.
+
 ---
 
 ## 🚀 Getting Started

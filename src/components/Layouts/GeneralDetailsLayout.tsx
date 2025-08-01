@@ -7,12 +7,12 @@ export const GeneralDetailsLayout = () => {
   if (!selectedUser) return null;
 
   const {
-    personal_information = {},
-    education_and_employment = {},
-    guarantor = [],
-    socials = {}
+    personal_information ,
+    education_and_employment,
+    guarantor,
+    socials
   } = selectedUser;
-  console.log(education_and_employment);
+  
   const guarantorobj = guarantor?.[0];
 
   return (
@@ -42,7 +42,7 @@ export const GeneralDetailsLayout = () => {
               : "N/A"
           }
         />
-        <DetailsTexts title="Loan Repayment" value={`₦${education_and_employment.loan_Repayment || "0"}`} />
+        <DetailsTexts title="Loan Repayment" value={`₦${education_and_employment.loan_repayment || "0"}`} />
       </DetailsTiles>
 
       <DetailsTiles title="Socials" className="border-b border-[#213F7D]/10">

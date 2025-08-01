@@ -32,10 +32,10 @@ const UserFilter: React.FC<UserFilterProps> = ({
               className="mt-1 w-full focus-within:none outline-0 text-sm ring-transparent focus-within:ring-0"
             >
               <option value="">Select</option>
-              {organizations.map((org) => (
-                <option key={org} value={org}>
-                  {org}
-                </option>
+                {organizations.map((org) => (
+                  <option key={org} value={org}>
+                    {org}
+                  </option>
               ))}
             </select>
           </div>

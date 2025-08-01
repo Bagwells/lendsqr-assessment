@@ -13,7 +13,8 @@ export const UserDetailsLayout =({ onClose}:UserDetailsProps)=> {
   const Tabs: string[] =['General Details', 'Documents','Bank Details','Loans', 'Savings', 'App and System']
   const [selectedTab, setSelectedTab] = useState<string>('General Details')
   const { selectedUser } = useContext(AppContext);
-  const {personal_information, education_and_employment} = selectedUser
+  if (!selectedUser) return null;
+  const { personal_information, education_and_employment } = selectedUser;
   
   const Render = () => {
     switch (selectedTab) {

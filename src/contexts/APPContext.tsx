@@ -1,10 +1,11 @@
 
 import { createContext } from "react"
-import type { User } from "../components/Layouts/UsersTableLayout"
+import type { User } from "../utils/userType";
+
 
 
 export interface AppContextType {
-  selectedUser: User;
+  selectedUser: User | null;
   setSelectedUser: (value:User)=>void;
   isUserDetails: boolean;
   setUserDetails: (value: boolean)=> void;
@@ -13,15 +14,7 @@ export interface AppContextType {
 }
 
 export const AppContext = createContext<AppContextType>({
-  selectedUser: {
-    id: "",
-    organization: "",
-    username: "",
-    email: "",
-    phone: "",
-    dateJoined: "",
-    status: "Active"
-  },
+  selectedUser:null,
   setSelectedUser:()=> {},
   isUserDetails: false,
   setUserDetails: ()=> {},

@@ -5,11 +5,11 @@ import { UserDetailsLayout } from "../../components/Layouts/UserDetailsLayout"
 import { AppContext } from "../../contexts/APPContext"
 
 export const DashboardUser =()=> {
-  const {selectedUser, isUserDetails, setUserDetails} = useContext(AppContext);
+  const {isUserDetails, setUserDetails} = useContext(AppContext);
   return(
     <>
       {isUserDetails && 
-        <UserDetailsLayout Details={{ ...selectedUser}} onClose={()=>setUserDetails(false)}/>
+        <UserDetailsLayout onClose={()=>setUserDetails(false)}/>
       }
       { !isUserDetails &&
         <div className="w-full h-full p-6 md:!p-[48px] xl:!p-[60px] space-y-10">
