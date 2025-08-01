@@ -44,20 +44,12 @@ const UserTable: React.FC = () => {
       dateJoined: '',
       status: ''
     });
+    const [pendingFilters, setPendingFilters] = useState<UserFilters>({ ...filters });
     const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
     const {selectedUser, setSelectedUser, setUserDetails} = useContext(AppContext);
     const [selectedID, setSelectedID] = useState<string | number | undefined>(undefined);
     const [openStatusBar, setOpenStatusBar] = useState<boolean>(false);
-    const {
-      paginatedData,
-      currentPage,
-      pageSize,
-      totalPages,
-      totalItems,
-      pageSizes,
-      onPageChange,
-      onPageSizeChange,
-    } = usePagination(streamlinedUsers ?? [], 10);
+    
 
 
     const toggleStatus =()=> setOpenStatusBar(!openStatusBar)
@@ -77,8 +69,14 @@ const UserTable: React.FC = () => {
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
       const { name, value } = e.target;
-      setFilters((prev) => ({ ...prev, [name]: value }));
+      setPendingFilters((prev) => ({ ...prev, [name]: value }));
     };
+
+    const handleApplyFilters = () => {
+      setFilters({ ...pendingFilters });
+      setIsOpenFilter(false);
+    };
+
 
     const handleReset = () => {
       setFilters({
@@ -104,6 +102,17 @@ const UserTable: React.FC = () => {
       );
     });
 
+    const {
+      paginatedData,
+      currentPage,
+      pageSize,
+      totalPages,
+      totalItems,
+      pageSizes,
+      onPageChange,
+      onPageSizeChange,
+    } = usePagination(filteredUsers ?? [], 10);
+
     useEffect(()=>{
       fetchUserFn()
     },[])
@@ -113,14 +122,15 @@ const UserTable: React.FC = () => {
     <div className="relative gap-6 work-sans">
       { isOpenFilter &&
         <UserFilter
-          filters={filters}
+          filters={pendingFilters}
           onChange={handleChange}
+          onApply={handleApplyFilters}
           onReset={handleReset}
           organizations={uniqueValues(streamlinedUsers, 'organization')}
           statuses={Object.keys(statusClasses)}
         />
       }
-      <div className="w-full bg-white p-[30px] Border rounded-2xl overflow-x-auto">
+      <div className="w-full h-full max-h-[640px] bg-white p-[30px] Border rounded-2xl overflow-y-auto">
         {
           loading && <div className='flex justify-center items-centerw-full h-20'>
             <div className='animate-spin border-b-4 border-text-color rounded-full'/>
@@ -133,7 +143,7 @@ const UserTable: React.FC = () => {
           </div>
         }
         { streamlinedUsers && !loading &&
-          <table className="min-w-3xl w-full">
+          <table className="min-w-[820px] w-full">
             <thead>
               <tr>
                 {headers.map((header) => (

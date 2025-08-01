@@ -1,69 +1,123 @@
-# React + TypeScript + Vite
+# Lendsqr Assessment App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modular, well-structured React + TypeScript project built to showcase a user management dashboard interface. It features user listing, detail viewing, custom filtering, pagination, and responsive layout using SCSS and TailwindCSS.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ⚙️ Tech Stack
 
-## Expanding the ESLint configuration
+- **React (with TypeScript)**
+- **SCSS Modules** for modular, maintainable styles, utility class creation.
+- **Custom SCSS Utility Classes** for consistent, reusable design tokens
+- **TailwindCSS** (used as fallback utility class framework)
+- **React Context API** for global state management
+- **React Toastify** for in-app pop-up notifications for good ux
+- **Custom Hooks** for encapsulated business logic
+- **SessionStorage** for local caching of fetched user data
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📁 Folder Structure (src/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+```
+src/
+│
+├── components/
+│   ├── Layouts/             # Reusable layout sections (table, sidebar, nav, detail blocks)
+│   ├── UI/                  # Stateless UI components (Icon, Pagination, Preloader)
+│   └── utilities/           # Dynamic UI helpers (LoadingScreen)
+│
+├── contexts/
+│   └── APPContext.tsx       # Global app context (e.g., selected user state)
+│
+├── hooks/                   # Encapsulated logic for fetching, auth, pagination, dashboard
+│   ├── useAPI.ts
+│   ├── useAuth.ts
+│   ├── useDashboard.ts
+│   └── usePagination.ts
+│
+├── pages/
+│   ├── auth/                # Auth screen(s)
+│   └── dashboard/           # Dashboard and details views
+│
+├── providers/
+│   └── AppProvider.tsx      # Global state provider wrapper
+│
+├── Router/
+│   └── routes.tsx           # Route declarations
+│
+├── styles/                  # Custom SCSS structure
+│   ├── _breakpoints.scss
+│   ├── _colors.scss
+│   ├── _dimensions.scss
+│   ├── _layout.scss
+│   ├── _opacity.scss
+│   ├── _positioning.scss
+│   ├── _spacing.scss
+│   ├── _typography.scss
+│   ├── color.scss
+│   ├── font.scss
+│   ├── style.scss
+│   └── utilities.scss       # 🔧 Custom utility classes (used throughout the app)
+│
+├── utils/
+│   └── businessMenu.ts           # Formatters, transformers, etc.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧠 Key Features
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Utility-First Design with SCSS**:
+  - Project uses hand-rolled SCSS utility classes (`styles/utilities.scss`) for spacing, layout, color, font utilities, giving full control and consistency.
+  - TailwindCSS complements this as a fallback framework — ensuring development speed without losing customizability.
+  
+- **Data Optimization**:
+  - Users fetched from a `.json` file and cached via `sessionStorage` to avoid unnecessary fetches.
+  
+- **Smart Pagination & Filters**:
+  - Built via custom `usePagination` and `useDashboard` hooks.
+  - Filters only trigger on "Apply" to reduce re-renders.
+  
+- **Dynamic User Views**:
+  - Flattened user data used for tables.
+  - Raw user object preserved and used in detailed views.
+
+- **State & UX Enhancements**:
+  - `AppContext` for selected user.
+  - Notifications handled via `react-toastify`.
+  - `LoadingScreen` & `Preloader` improve user experience.
+
+---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/your-username/lendsqr-assessment.git
+cd lendsqr-assessment
+
+npm install
+npm run dev
 ```
+
+---
+
+## 📦 Build
+
+```bash
+npm run build
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feat/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feat/amazing-feature`)
+5. Open a pull request
+
+---

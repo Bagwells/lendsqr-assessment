@@ -1,19 +1,19 @@
 import { FaArrowLeftLong, FaStar } from "react-icons/fa6";
-import type { User } from "./UsersTableLayout";
 import { LuUserRound } from "react-icons/lu";
 import { FaRegStar } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { GeneralDetailsLayout } from "./GeneralDetailsLayout";
+import { AppContext } from "../../contexts/APPContext";
 interface UserDetailsProps {
-  Details: User;
   onClose: ()=> void;
 }
 
-export const UserDetailsLayout =({Details, onClose}:UserDetailsProps)=> {
+export const UserDetailsLayout =({ onClose}:UserDetailsProps)=> {
 
   const Tabs: string[] =['General Details', 'Documents','Bank Details','Loans', 'Savings', 'App and System']
   const [selectedTab, setSelectedTab] = useState<string>('General Details')
-  
+  const { selectedUser } = useContext(AppContext);
+  const {personal_information, education_and_employment} = selectedUser
   
   const Render = () => {
     switch (selectedTab) {
@@ -47,13 +47,13 @@ export const UserDetailsLayout =({Details, onClose}:UserDetailsProps)=> {
         <div className="flex items-center gap-2 sm:gap-5">
           <button
             type="submit"
-            className="flex-1 min-w-[140px] danger border border-[#E4033B] hover:opacity-60 text-semibold rounded-lg px-3 py-2 text-xs sm:text-sm"
+            className="flex-1 min-w-[140px] text-nowrap danger border border-[#E4033B] hover:opacity-60 text-semibold rounded-lg px-3 py-2 text-xs sm:text-sm"
           >
             BLACKLIST USER
           </button>
           <button
             type="submit"
-            className="flex-1 min-w-[140px] primary border border-[#39ccdc] hover:opacity-60 text-semibold rounded-lg px-3 py-2 text-xs sm:text-sm"
+            className="flex-1 min-w-[140px] text-nowrap primary border border-[#39ccdc] hover:opacity-60 text-semibold rounded-lg px-3 py-2 text-xs sm:text-sm"
           >
             ACTIVATE USER
           </button>
@@ -66,10 +66,10 @@ export const UserDetailsLayout =({Details, onClose}:UserDetailsProps)=> {
           </div>
           <div className="text-base lg:text-[22px] text-medium title-color work-sans">
             <h6>
-              {Details?.username ?? 'Grace Effiom'}
+              {personal_information.full_name ?? 'Grace Effiom'}
             </h6>
             <p className="text-xs lg:text-base text-[#545F7D]">
-              {Details?.id ?? 'LSQFf587g90'}
+              {personal_information?.id ?? 'N/A'}
             </p>
           </div>
           <div className="flex flex-col gap-2.5 lg:h-[100px] items-center justify-center px-[30px] border-l sm:border-x border-[#545F7D25] text-color text-sm text-medium">
@@ -82,7 +82,7 @@ export const UserDetailsLayout =({Details, onClose}:UserDetailsProps)=> {
           </div>
           <div className="flex flex-col text-medium text-base lg:text-[22px] title-color work-sans pl-5">
             <h6>
-              ₦{'200,000.00'}
+              {education_and_employment.monthly_income}
             </h6>
             <p className="text-xs lg:text-base text-[#545F7D]">
               {'9912345678/Providus Bank'}

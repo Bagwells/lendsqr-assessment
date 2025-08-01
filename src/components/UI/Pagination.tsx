@@ -1,7 +1,6 @@
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -12,7 +11,7 @@ interface PaginationProps {
   onPageSizeChange: (size: number) => void;
 }
 
-const Pagination:React.FC<PaginationProps> = ({
+const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   pageSize,
@@ -21,29 +20,40 @@ const Pagination:React.FC<PaginationProps> = ({
   onPageChange,
   onPageSizeChange,
 }) => {
-
   const generatePages = () => {
-    if (totalPages <= 5) {
-      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    const delta = 2;
+    const range: (number | string)[] = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        (i >= currentPage - delta && i <= currentPage + delta)
+      ) {
+        range.push(i);
+      } else if (range[range.length - 1] !== "...") {
+        range.push("...");
+      }
     }
 
-    if (currentPage <= 3) return [1, 2, 3, "...", totalPages];
-    if (currentPage >= totalPages - 2) return [1, "...", totalPages - 2, totalPages - 1, totalPages];
-
-    return [1, "...", currentPage, "...", totalPages];
+    return range;
   };
 
   const pagesToShow = generatePages();
 
   return (
     <div className="flex work-sans flex-col md:flex-row justify-between items-center gap-4 px-4 py-6 w-full mb-10">
+      {/* Page size selector */}
       <div className="flex items-center text-sm">
         <span className="mr-2">Showing</span>
         <div className="bg-[#213f7d]/10 rounded-md w-18 px-2 py-1">
           <select
             value={pageSize}
-            onChange={(e) => onPageSizeChange(Number(e.target.value))}
-            className="w-full rounded-md text-sm focus:outline-none focus:ring-0"
+            onChange={(e) => {
+              onPageSizeChange(Number(e.target.value));
+              onPageChange(1); // reset to first page when pageSize changes
+            }}
+            className="w-full rounded-md text-sm focus:outline-none focus:ring-0 bg-transparent"
           >
             {pageSizes.map((size) => (
               <option key={size} value={size}>
@@ -55,7 +65,9 @@ const Pagination:React.FC<PaginationProps> = ({
         <span className="ml-2">out of {totalItems}</span>
       </div>
 
+      {/* Pagination buttons */}
       <div className="flex items-center space-x-2 text-sm">
+        {/* Previous button */}
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
@@ -64,17 +76,21 @@ const Pagination:React.FC<PaginationProps> = ({
           <IoIosArrowBack size={16} />
         </button>
 
+        {/* Page numbers */}
         {pagesToShow.map((p, i) =>
           typeof p === "string" ? (
-            <span key={i} className="px-2">
+            <span key={`ellipsis-${i}`} className="px-2">
               ...
             </span>
           ) : (
             <button
               key={p}
               onClick={() => onPageChange(p)}
-              className={`px-2 py-1 rounded-md ${
-                currentPage === p ? "bg-[#213f7d]/10 text-color" : ""
+              aria-current={currentPage === p ? "page" : undefined}
+              className={`px-3 py-1 rounded-md transition ${
+                currentPage === p
+                  ? "bg-[#213f7d] text-white"
+                  : "bg-[#213f7d]/10 text-[#213f7d]"
               }`}
             >
               {p}
@@ -82,6 +98,7 @@ const Pagination:React.FC<PaginationProps> = ({
           )
         )}
 
+        {/* Next button */}
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}

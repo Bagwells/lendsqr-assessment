@@ -4,6 +4,7 @@ import type { UserFilters } from './UsersTableLayout';
 type UserFilterProps = {
   filters: UserFilters;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onApply: () => void;
   onReset: () => void;
   organizations: string[];
   statuses: string[];
@@ -14,7 +15,8 @@ const UserFilter: React.FC<UserFilterProps> = ({
   onChange,
   onReset,
   organizations,
-  statuses
+  statuses,
+  onApply
 }) => {
   return (
     <div className={`absolute top-16 left-4 z-[5] w-full max-w-[280px] Border bg-white rounded-sm p-4 py-[30px] drop-shadow-lite`}>
@@ -27,7 +29,7 @@ const UserFilter: React.FC<UserFilterProps> = ({
               name="organization"
               value={filters.organization || ''}
               onChange={onChange}
-              className="mt-1 w-full text-sm ring-transparent focus-within:ring-0"
+              className="mt-1 w-full focus-within:none outline-0 text-sm ring-transparent focus-within:ring-0"
             >
               <option value="">Select</option>
               {organizations.map((org) => (
@@ -91,10 +93,10 @@ const UserFilter: React.FC<UserFilterProps> = ({
           <label className="text-sm text-color">Status</label>
           <div className='w-full border-1 rounded-md px-5 py-3'>
             <select
-              name="organization"
+              name="statuses"
               value={filters.status || ''}
               onChange={onChange}
-              className="mt-1 w-full text-sm ring-transparent focus-within:ring-0"
+              className="mt-1 w-full text-sm ring-transparent focus-none outline-0 focus-within:ring-0"
             >
               <option value="">Select</option>
               {statuses.map((status) => (
@@ -117,7 +119,7 @@ const UserFilter: React.FC<UserFilterProps> = ({
           <button
             type="submit"
             className="flex-1 bg-primary border border-[#39ccdc] hover:opacity-60 text-semibold text-white rounded-md px-3 py-2 text-sm"
-            onClick={(e) => e.preventDefault()}
+            onClick={onApply}
           >
             Filter
           </button>
