@@ -21,7 +21,6 @@ const Pagination:React.FC<PaginationProps> = ({
   onPageChange,
   onPageSizeChange,
 }) => {
-  // const pageNumbers = [];
 
   const generatePages = () => {
     if (totalPages <= 5) {

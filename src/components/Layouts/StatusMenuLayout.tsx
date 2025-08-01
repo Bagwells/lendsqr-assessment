@@ -1,7 +1,7 @@
 import { FiUserX } from "react-icons/fi";
 import { GrUserExpert } from "react-icons/gr";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import type { User } from "./UsersTableLayout";
+import type { User } from "../../utils/userType";
 
 interface StatusProps {
   onBlacklist: ()=> void;
