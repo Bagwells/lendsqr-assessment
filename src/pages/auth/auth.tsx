@@ -2,7 +2,7 @@ import { Logo } from "../../components/UI/Logo"
 import { LoginForm } from "./loginForm"
 
 
-export const AuthScreen =()=> {
+const AuthScreen =()=> {
   return(
     <div className="w-screen h-svh lg:h-screen">
       <div className="bg-white flex flex-col lg:flex-row w-full h-full">
@@ -23,3 +23,5 @@ export const AuthScreen =()=> {
     </div>
   )
 }
+
+export default AuthScreen;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -11,11 +12,13 @@ type loginProp = {
 }
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const {setIsAuth} = useAuth();
   const [login, setLogin] = useState<loginProp>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<loginProp>({ email: '', password: '' });
   const [info, setInfos] = useState({email:false,password:false});
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -29,10 +32,24 @@ export const LoginForm = () => {
     return Object.values(newErrors).every((error) => error === '');
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validate()) setIsAuth(true);
-
+    setIsSubmitting(true);
+    try {
+        if (validate()) {
+        setIsAuth(true);
+        toast.success('Sign-In successful')
+        navigate("/dashboard")
+      } else {
+        toast.info('Fill the fields, correctly')
+      }
+    } catch (err) {
+      console.error('Sign In', err)
+      toast.error('Sign-in failed, please try again')
+    } finally {
+      setIsSubmitting(false)
+    }
+    
   };
 
   return (
@@ -82,9 +99,12 @@ export const LoginForm = () => {
           FORGOT PASSWORD?
         </Link>
         <button type="submit" 
-          disabled={login?.password.length < 8 || login?.email.length == 0}
+          disabled={login?.password.length < 8 || login?.email.length == 0 || isSubmitting}
           className="w-full flex items-center justify-center rounded-lg bg-primary h-12 text-white mt-[30px] disabled:opacity-60 disabled:cursor-not-allowed">
-          LOG IN
+          {isSubmitting ? <span>Signing In... <div className='w-4 h-4 border-3 rounded-full border-white animate-spin'/> class</span> 
+            :
+            'LOG IN'
+          }
         </button>
       </form>
     </div>
